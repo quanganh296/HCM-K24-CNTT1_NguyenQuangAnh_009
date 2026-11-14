@@ -71,15 +71,18 @@ public class RegistrationServiceImpl implements RegistrationService {
         return mapToRegistrationResponse(savedRegistration, savedDetails);
 
     }
+       //throw new UnsupportedOperationException();
+
 
 
     private RegistrationResponse mapToRegistrationResponse(Registration registration, List<RegistrationDetail> details) {
-        List<RegistrationDetail> itemResponses = details.stream().map(details -> new RegistrationDetailResponse(
-                details.getId(),
-                details.getEventId(),
-                details.getQuantity(),
-                details.getTicketPrice(),
-                details.getLineTotal()
+        List<RegistrationDetailResponse> itemResponses = details.stream()
+                .map(detail -> new RegistrationDetailResponse(
+                detail.getId(),
+                detail.getEventId(),
+                detail.getQuantity(),
+                detail.getTicketPrice(),
+                detail.getLineTotal()
         )).toList();
 
         return new RegistrationResponse(
@@ -90,7 +93,6 @@ public class RegistrationServiceImpl implements RegistrationService {
                 registration.getStatus(),
                 itemResponses
         );
-        throw new UnsupportedOperationException();
-    }
+
 
 }
